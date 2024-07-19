@@ -1,0 +1,14 @@
+/Users/akiya/RiderProjects/CardTest/CardTest/bin/Debug/net8.0/CardTest
+/Users/akiya/RiderProjects/CardTest/CardTest/bin/Debug/net8.0/CardTest.deps.json
+/Users/akiya/RiderProjects/CardTest/CardTest/bin/Debug/net8.0/CardTest.runtimeconfig.json
+/Users/akiya/RiderProjects/CardTest/CardTest/bin/Debug/net8.0/CardTest.dll
+/Users/akiya/RiderProjects/CardTest/CardTest/bin/Debug/net8.0/CardTest.pdb
+/Users/akiya/RiderProjects/CardTest/CardTest/obj/Debug/net8.0/CardTest.GeneratedMSBuildEditorConfig.editorconfig
+/Users/akiya/RiderProjects/CardTest/CardTest/obj/Debug/net8.0/CardTest.AssemblyInfoInputs.cache
+/Users/akiya/RiderProjects/CardTest/CardTest/obj/Debug/net8.0/CardTest.AssemblyInfo.cs
+/Users/akiya/RiderProjects/CardTest/CardTest/obj/Debug/net8.0/CardTest.csproj.CoreCompileInputs.cache
+/Users/akiya/RiderProjects/CardTest/CardTest/obj/Debug/net8.0/CardTest.dll
+/Users/akiya/RiderProjects/CardTest/CardTest/obj/Debug/net8.0/refint/CardTest.dll
+/Users/akiya/RiderProjects/CardTest/CardTest/obj/Debug/net8.0/CardTest.pdb
+/Users/akiya/RiderProjects/CardTest/CardTest/obj/Debug/net8.0/CardTest.genruntimeconfig.cache
+/Users/akiya/RiderProjects/CardTest/CardTest/obj/Debug/net8.0/ref/CardTest.dll
