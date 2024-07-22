@@ -1,6 +1,6 @@
 namespace CardTest;
 
-public class CardTest
+public class CardDefinition
 {
     private const int CardMax = 12;
 
@@ -10,6 +10,14 @@ public class CardTest
         B,
         C,
         D
+    }
+    
+    public enum ActionType
+    {
+        None,
+        Peek,
+        Spy,
+        Swap
     }
 
     public struct Card
@@ -39,5 +47,21 @@ public class CardTest
     public List<Card> ShuffleCards(List<Card> cards)
     {
         return cards.OrderBy(x => Random.Shared.Next()).ToList();
+    }
+    
+    public int GetScore(Card card)
+    {
+        return card is { number: 13, type: CardType.A or CardType.B } ? 0 : card.number;
+    }
+
+    public ActionType GetActionType(Card card)
+    {
+        return card.number switch
+        {
+            7 or 8 => ActionType.Peek,
+            9 or 10 => ActionType.Spy,
+            11 or 12 => ActionType.Swap,
+            _ => ActionType.None
+        };
     }
 }

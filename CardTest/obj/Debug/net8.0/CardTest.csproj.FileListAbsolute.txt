@@ -12,3 +12,4 @@
 /Users/akiya/RiderProjects/CardTest/CardTest/obj/Debug/net8.0/CardTest.pdb
 /Users/akiya/RiderProjects/CardTest/CardTest/obj/Debug/net8.0/CardTest.genruntimeconfig.cache
 /Users/akiya/RiderProjects/CardTest/CardTest/obj/Debug/net8.0/ref/CardTest.dll
+/Users/akiya/RiderProjects/CardTest/CardTest/obj/Debug/net8.0/CardTest.sourcelink.json
