@@ -2,15 +2,10 @@ namespace CardTest;
 
 public class CardDefinition
 {
-    private const int CardMax = 12;
-
-    public enum CardType
-    {
-        A,
-        B,
-        C,
-        D
-    }
+    private const int CardMin = 0;
+    private const int CardMax = 13;
+    private const int NormalCardCount = 4;
+    private const int SpecialCardCount = 2;
     
     public enum ActionType
     {
@@ -20,48 +15,43 @@ public class CardDefinition
         Swap
     }
 
-    public struct Card
+    public readonly record struct Card(int Number)
     {
-        public CardType type;
-        public int number;
-    }
-
-    public List<Card> GetNewCards()
-    {
-        var cards = new List<Card>();
-        for (var i = 0; i < CardMax; i++)
-        {
-            foreach (CardType type in Enum.GetValues(typeof(CardType)))
-            {
-                cards.Add(new Card
-                {
-                    type = type,
-                    number = i + 1
-                });
-            }
-        }
-
-        return cards;
-    }
-
-    public List<Card> ShuffleCards(List<Card> cards)
-    {
-        return cards.OrderBy(x => Random.Shared.Next()).ToList();
-    }
-    
-    public int GetScore(Card card)
-    {
-        return card is { number: 13, type: CardType.A or CardType.B } ? 0 : card.number;
-    }
-
-    public ActionType GetActionType(Card card)
-    {
-        return card.number switch
+        public ActionType Type => Number switch
         {
             7 or 8 => ActionType.Peek,
             9 or 10 => ActionType.Spy,
             11 or 12 => ActionType.Swap,
             _ => ActionType.None
         };
+    }
+
+    public static List<Card> GetNewCards()
+    {
+        var cards = new List<Card>();
+        for (var i = CardMin; i <= CardMax; i++)
+        {
+            if (i is CardMin or CardMax)
+            {
+                for (var j = 0; j < SpecialCardCount; j++)
+                {
+                    cards.Add(new Card(i));
+                }
+            }
+            else
+            {
+                for (var j = 0; j < NormalCardCount; j++)
+                {
+                    cards.Add(new Card(i));
+                }
+            }
+        }
+
+        return cards;
+    }
+
+    public static List<Card> ShuffleCards(List<Card> cards)
+    {
+        return cards.OrderBy(x => Random.Shared.Next()).ToList();
     }
 }

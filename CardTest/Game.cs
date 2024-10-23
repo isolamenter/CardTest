@@ -3,109 +3,50 @@ using static CardDefinition;
 
 public class Game
 {
-    public Queue<Card> Deck;
-    public Stack<Card> DiscardPile;
-    public List<List<Card>> Players;
-    private CardDefinition _cardDefinition;
+    private const int DealCount = 4;
     
-    public Game(int num)
+    private Queue<Card> _deck = new();
+    private Stack<Card> _discardPile = new();
+    public readonly List<Player> Players = [];
+
+    public void Start(int num = 4)
     {
-        Players = new List<List<Card>>();
-        _cardDefinition = new CardDefinition();
+        _deck = new Queue<Card>(ShuffleCards(GetNewCards()));
+        _discardPile.Clear();
         
         for (var i = 0; i < num; i++)
         {
-            var player = new List<Card>();
+            var player = new Player(0);
             Players.Add(player);
         }
     }
 
-    public void Start()
-    {
-        var cards = _cardDefinition.GetNewCards();
-        Deck = new Queue<Card>(_cardDefinition.ShuffleCards(cards));
-        DiscardPile = new Stack<Card>();
-    }
-
     public void Deal()
     {
-        for (int i = 0; i < 4; i++)
+        foreach (var player in Players)
         {
-            for (int j = 0; j < Players.Count; j++)
+            for (var i = 0; i < DealCount; i++)
             {
-                Players[j].Add(DrawFromDeck());
+                //draw always success in the dealing
+                DrawFromDeck(out var card);
+                player.GetCard(card);
             }
         }
     }
 
-    public void PlayerDrawFromDeck()
-    {
-        var card = DrawFromDeck();
-        
+    private bool DrawFromDeck(out Card card)
+    { 
+        return _deck.TryDequeue(out card);
     }
 
-    public void PlayerDrawFromDiscardPile()
+    private bool DrawFormDiscardPile(out Card card)
     {
-        
-    }
-    
-    public void PlayerCallCABO()
-    {
-        
+        return _discardPile.TryPop(out card);
     }
 
-    public void DiscardCards(List<Card> chosenCards)
+    private void CallCABO(Player player)
     {
-        foreach (var card in chosenCards)
-        {
-            DiscardPile.Push(card);
-        }
-    }
-
-    public void ExchangeCards(List<Card> playerCards, List<Card> chosenCards, Card drawnCard)
-    {
-        foreach (var card in chosenCards)
-        {
-            playerCards.Remove(card);
-        }
-        DiscardCards(chosenCards);
-        playerCards.Add(drawnCard);
-    }
-
-    public void Peek(List<Card> playerCards, int index)
-    {
-        
-    }
-
-    public void Spy(List<Card> playerCards, int index)
-    {
-        
-    }
-
-    public void Swap(List<Card> player1Cards, int index1, List<Card> player2Cards, int index2)
-    {
-        
-    }
-    
-    
-    private Card DrawFromDeck()
-    {
-        if (Deck.TryDequeue(out var card))
-        {
-            return card;
-        }
-
-        NewDeck();
-        return Deck.Dequeue();
-    }
-
-    private Card DrawFromDiscardPile()
-    {
-        return DiscardPile.Pop();
-    }
-    
-    private void NewDeck()
-    {
-        
+        var index = Players.IndexOf(player);
+        var lastTurnPlayers = Players.Skip(index + 1).Concat(Players.Take(index));
     }
 }

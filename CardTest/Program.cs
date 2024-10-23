@@ -4,14 +4,9 @@ class Program
 {
     private static void Main()
     {
-        var game = new Game(4);
+        var game = new Game();
         game.Start();
         game.Deal();
-        
-        for (int i = 0; i < game.Players.Count; i++)
-        {
-            Debug(i, game.Players[i]);
-        }
     }
 
     private static void Debug(int index, List<CardDefinition.Card> cards)
@@ -19,8 +14,8 @@ class Program
         foreach (var card in cards)
         {
             Console.WriteLine($"Play{index}" +
-                              $"\ncard type: {card.type}" +
-                              $"\ncard number: {card.number}");
+                              $"\ncard type: {card.Type}" +
+                              $"\ncard number: {card.Number}");
         }
     }
 }
