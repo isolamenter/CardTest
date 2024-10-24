@@ -7,7 +7,8 @@ public class Game
     
     private Queue<Card> _deck = new();
     private Stack<Card> _discardPile = new();
-    public readonly List<Player> Players = [];
+    private readonly List<Player> _players = [];
+    public bool IsEnded { get; private set; }
 
     public void Start(int num = 4)
     {
@@ -17,13 +18,13 @@ public class Game
         for (var i = 0; i < num; i++)
         {
             var player = new Player(0);
-            Players.Add(player);
+            _players.Add(player);
         }
     }
 
     public void Deal()
     {
-        foreach (var player in Players)
+        foreach (var player in _players)
         {
             for (var i = 0; i < DealCount; i++)
             {
@@ -46,7 +47,12 @@ public class Game
 
     private void CallCABO(Player player)
     {
-        var index = Players.IndexOf(player);
-        var lastTurnPlayers = Players.Skip(index + 1).Concat(Players.Take(index));
+        var index = _players.IndexOf(player);
+        var lastTurnPlayers = _players.Skip(index + 1).Concat(_players.Take(index));
+    }
+
+    private void OnPlayerTurn(Player player)
+    {
+        
     }
 }
